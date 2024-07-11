@@ -38,13 +38,13 @@ contract SmartVote {
     /**
      * @notice Allows a user to cast their vote in a specific poll.
      * @dev Records the user's vote for the specified poll.
-     * @param poll_id The id of the poll in which the user is voting.
+     * @param poll_idx The index of the poll in which the user is voting.
      * @param vote The vote (true/false) the user is casting.
      */
-    function castVote(uint poll_id, bool vote) external {
-        require(poll_id < polls.length, "Invalid poll id"); // Check if poll_id is within valid range
+    function castVote(uint poll_idx, bool vote) external {
+        require(poll_idx < polls.length, "Invalid poll index"); // Check if poll_idx is within valid range
 
-        Poll storage poll = polls[poll_id];                 // Get a reference to the selected poll
+        Poll storage poll = polls[poll_idx];                 // Get a reference to the selected poll
         require(poll.isOpen, "Poll is closed");             // Check if the poll is open for voting
 
         address userAddress = msg.sender;
@@ -62,24 +62,24 @@ contract SmartVote {
     /**
      * @notice Closes a specific poll, preventing any further votes from being cast.
      * @dev Sets the isOpen status of the specified poll to false, ensuring it cannot be voted on.
-     * @param poll_id The id of the poll to close.
+     * @param poll_idx The index of the poll to close.
      */
-    function closePoll(uint poll_id) external {
-        require(poll_id < polls.length, "Invalid poll id"); // Check if poll_id is within valid range
-        Poll storage poll = polls[poll_id];                 // Get a reference to the selected poll
+    function closePoll(uint poll_idx) external {
+        require(poll_idx < polls.length, "Invalid poll index"); // Check if poll_idx is within valid range
+        Poll storage poll = polls[poll_idx];                 // Get a reference to the selected poll
         poll.isOpen = false;                                // Set isOpen to false
     }
 
     /**
      * @notice Returns the number of positive and negative votes for a specific poll.
      * @dev Retrieves the vote counts for the specified poll and returns them.
-     * @param poll_id The id of the poll whose votes are being queried.
+     * @param poll_idx The index of the poll whose votes are being queried.
      * @return numOfPositiveVotes The number of positive votes for the poll.
      * @return numOfNegativeVotes The number of negative votes for the poll.
      */
-    function showPollVotes(uint poll_id) external view returns (uint numOfPositiveVotes, uint numOfNegativeVotes) {
-        require(poll_id < polls.length, "Invalid poll id");         // Check if poll_id is within valid range
-        Poll storage poll = polls[poll_id];                         // Get a reference to the selected poll
+    function showPollVotes(uint poll_idx) external view returns (uint numOfPositiveVotes, uint numOfNegativeVotes) {
+        require(poll_idx < polls.length, "Invalid poll index");         // Check if poll_idx is within valid range
+        Poll storage poll = polls[poll_idx];                         // Get a reference to the selected poll
         return(poll.numOfPositiveVotes, poll.numOfNegativeVotes);   // Return vote counts for positive and negative votes
     }
 
