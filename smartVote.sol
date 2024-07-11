@@ -44,12 +44,12 @@ contract SmartVote {
     function castVote(uint poll_idx, bool vote) external {
         require(poll_idx < polls.length, "Invalid poll index"); // Check if poll_idx is within valid range
 
-        Poll storage poll = polls[poll_idx];                 // Get a reference to the selected poll
-        require(poll.isOpen, "Poll is closed");             // Check if the poll is open for voting
+        Poll storage poll = polls[poll_idx];                    // Get a reference to the selected poll
+        require(poll.isOpen, "Poll is closed");                 // Check if the poll is open for voting
 
         address userAddress = msg.sender;
-        require(!poll.votes[userAddress], "Already voted"); // Check if the user has not already voted
-        poll.votes[userAddress] = vote;                     // Record the user's vote
+        require(!poll.votes[userAddress], "Already voted");     // Check if the user has not already voted
+        poll.votes[userAddress] = vote;                         // Record the user's vote
 
         // Increment the vote counters based on the vote value
         if (vote) {
@@ -66,8 +66,8 @@ contract SmartVote {
      */
     function closePoll(uint poll_idx) external {
         require(poll_idx < polls.length, "Invalid poll index"); // Check if poll_idx is within valid range
-        Poll storage poll = polls[poll_idx];                 // Get a reference to the selected poll
-        poll.isOpen = false;                                // Set isOpen to false
+        Poll storage poll = polls[poll_idx];                    // Get a reference to the selected poll
+        poll.isOpen = false;                                    // Set isOpen to false
     }
 
     /**
@@ -79,8 +79,8 @@ contract SmartVote {
      */
     function showPollVotes(uint poll_idx) external view returns (uint numOfPositiveVotes, uint numOfNegativeVotes) {
         require(poll_idx < polls.length, "Invalid poll index");         // Check if poll_idx is within valid range
-        Poll storage poll = polls[poll_idx];                         // Get a reference to the selected poll
-        return(poll.numOfPositiveVotes, poll.numOfNegativeVotes);   // Return vote counts for positive and negative votes
+        Poll storage poll = polls[poll_idx];                            // Get a reference to the selected poll
+        return(poll.numOfPositiveVotes, poll.numOfNegativeVotes);       // Return vote counts for positive and negative votes
     }
 
 }
