@@ -20,7 +20,7 @@ It aims to enhance the voting process within communities and organizations, ensu
 - **Single Vote Per User**: Each user can vote only once per poll, ensuring fairness.
 
 ## Acknowledgments
-This project was developed as part of the Blockchain Technologies and Applications course at the University of Piraeus. Contributions and feedback are always welcome!
+This project was developed as part of the "Blockchain Technologies and Applications" course at the University of Piraeus. Contributions and feedback are always welcome!
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
